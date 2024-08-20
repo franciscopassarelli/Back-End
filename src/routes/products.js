@@ -23,11 +23,24 @@ router.get('/:pid', (req, res) => {
 // Ruta para agregar un nuevo producto
 router.post('/', (req, res) => {
     const products = readProducts();
+    const { title, price } = req.body;
+
+    // Validaciones
+    if (!title || typeof title !== 'string' || title.trim() === '') {
+        return res.status(400).send({ message: 'El título es obligatorio y debe ser una cadena no vacía' });
+    }
+
+    if (price === undefined || typeof price !== 'number' || price <= 0) {
+        return res.status(400).send({ message: 'El precio debe ser un número mayor a 0' });
+    }
+
     const newProduct = {
         id: (products.length + 1).toString(),
-        ...req.body,
+        title,
+        price,
         status: req.body.status !== undefined ? req.body.status : true,
     };
+
     products.push(newProduct);
     writeProducts(products);
     res.status(201).json(newProduct);
@@ -39,6 +52,12 @@ router.put('/:pid', (req, res) => {
     const index = products.findIndex(p => p.id === req.params.pid);
     if (index !== -1) {
         const updatedProduct = { ...products[index], ...req.body };
+
+        // Validaciones
+        if (updatedProduct.price !== undefined && (typeof updatedProduct.price !== 'number' || updatedProduct.price <= 0)) {
+            return res.status(400).send({ message: 'El precio debe ser un número mayor a 0' });
+        }
+
         products[index] = updatedProduct;
         writeProducts(products);
         res.json(updatedProduct);

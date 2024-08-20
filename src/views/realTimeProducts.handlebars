@@ -2,25 +2,34 @@
 <html>
 <head>
     <title>Real Time Products</title>
-    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
     <div class="container">
         <h1>Productos en Tiempo Real</h1>
         
-        <!-- Lista de productos -->
-        <ul id="product-list">
-            {{#each products}}
-            <li>{{this.title}} - {{this.price}}</li>
-            {{/each}}
-        </ul>
+        <!-- Contenedor para los productos -->
+        <div id="products-container">
+            <h2>Lista de Productos</h2>
+            <ul id="product-list">
+                {{#each products}}
+                <li data-id="{{this.id}}">
+                    {{this.title}} - {{this.price}}
+                    <button class="delete-btn">Eliminar</button>
+                </li>
+                {{/each}}
+            </ul>
+        </div>
         
         <!-- Formulario para agregar productos -->
-        <form id="product-form">
-            <input type="text" id="title" placeholder="Título" required>
-            <input type="number" id="price" placeholder="Precio" required>
-            <button type="submit">Agregar Producto</button>
-        </form>
+        <div id="form-container">
+            <h2>Agregar Producto</h2>
+            <form id="product-form">
+                <input type="text" id="title" placeholder="Título" required>
+                <input type="number" id="price" placeholder="Precio" required>
+                <button type="submit">Agregar Producto</button>
+            </form>
+        </div>
     </div>
     
     <script src="/socket.io/socket.io.js"></script>

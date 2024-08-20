@@ -12,6 +12,7 @@ const cartRoutes = require('./routes/carts');
 
 // Middleware para permitir que la app procese JSON
 app.use(express.json());
+app.use(express.urlencoded({ extended: true })); // Para manejar formularios
 
 // Configura Handlebars como motor de plantillas
 app.engine('handlebars', engine({
@@ -40,12 +41,29 @@ app.get('/realtimeproducts', (req, res) => {
 const server = http.createServer(app);
 const io = socketIo(server);
 
+// Productos en memoria para la demostración
+let products = [
+    { id: '1', title: 'Producto 1', price: 100 },
+    { id: '2', title: 'Producto 2', price: 200 }
+];
+
 // Configura WebSocket
 io.on('connection', (socket) => {
     console.log('New client connected');
+    
+    // Emitir la lista de productos al cliente conectado
+    socket.emit('updateProducts', products);
 
     socket.on('newProduct', (product) => {
-        io.emit('updateProducts', product);
+        // Asignar un ID único (en un caso real, deberías usar una base de datos)
+        product.id = (products.length + 1).toString();
+        products.push(product);
+        io.emit('updateProducts', products);
+    });
+
+    socket.on('deleteProduct', (productId) => {
+        products = products.filter(p => p.id !== productId);
+        io.emit('updateProducts', products);
     });
 
     socket.on('disconnect', () => {

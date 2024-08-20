@@ -2,26 +2,21 @@
 <html>
 <head>
     <title>Home</title>
-    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Bienvenido a la Página de Productos</h1>
+    <div class="home-container">
+        <h1 class="home-header">Bienvenido a la Página de Productos</h1>
         
-        <!-- Botón para redirigir a la página de productos en tiempo real -->
-        <a href="/realtimeproducts" class="btn-primary">
-            Ver Productos en Tiempo Real
-        </a>
-
         <!-- Lista de productos -->
-        <ul id="product-list">
+        <ul class="home-product-list" id="product-list">
             {{#each products}}
             <li>{{this.title}} - {{this.price}}</li>
             {{/each}}
         </ul>
+        
+        <!-- Botón para redirigir a la página de productos en tiempo real -->
+        <a href="/realtimeproducts" class="home-btn-primary">Ver Productos en Tiempo Real</a>
     </div>
-    
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="/js/home.js"></script>
 </body>
 </html>
