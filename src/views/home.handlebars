@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+    <link rel="stylesheet" href="">
+</head>
+<body>
+    <div class="container">
+        <h1>Bienvenido a la Página de Productos</h1>
+        
+        <!-- Botón para redirigir a la página de productos en tiempo real -->
+        <a href="/realtimeproducts" class="btn-primary">
+            Ver Productos en Tiempo Real
+        </a>
+
+        <!-- Lista de productos -->
+        <ul id="product-list">
+            {{#each products}}
+            <li>{{this.title}} - {{this.price}}</li>
+            {{/each}}
+        </ul>
+    </div>
+    
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/home.js"></script>
+</body>
+</html>
