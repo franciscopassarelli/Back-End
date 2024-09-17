@@ -1,30 +1,68 @@
-const fs = require('fs');
-const path = require('path');
+const Cart = require('../models/Cart');
+const Product = require('../models/Product');
 
-// Ruta del archivo donde se almacenan los carritos
-const cartsFilePath = path.join(__dirname, '../data/carts.json');
-
-// Leer carritos del archivo JSON
-const readCarts = () => {
+const getCarts = async (req, res) => {
     try {
-        const data = fs.readFileSync(cartsFilePath, 'utf-8');
-        return JSON.parse(data);
+        const carts = await Cart.find().populate('products.product'); // Populate to get product details
+        res.status(200).json(carts);
     } catch (error) {
-        console.error('Error al leer el archivo de carritos:', error);
-        return [];
+        res.status(500).json({ error: 'Error al obtener los carritos' });
     }
 };
 
-// Escribir carritos en el archivo JSON
-const writeCarts = (carts) => {
+const createCart = async (req, res) => {
     try {
-        fs.writeFileSync(cartsFilePath, JSON.stringify(carts, null, 2));
+        const newCart = new Cart(req.body);
+        await newCart.save();
+        res.status(201).json(newCart);
     } catch (error) {
-        console.error('Error al escribir el archivo de carritos:', error);
+        res.status(500).json({ error: 'Error al crear el carrito' });
+    }
+};
+
+const getCartById = async (req, res) => {
+    try {
+        const cart = await Cart.findById(req.params.cid).populate('products.product');
+        if (cart) {
+            res.status(200).json(cart);
+        } else {
+            res.status(404).json({ error: 'Carrito no encontrado' });
+        }
+    } catch (error) {
+        res.status(500).json({ error: 'Error al obtener el carrito' });
+    }
+};
+
+const updateCart = async (req, res) => {
+    try {
+        const updatedCart = await Cart.findByIdAndUpdate(req.params.cid, req.body, { new: true }).populate('products.product');
+        if (updatedCart) {
+            res.status(200).json(updatedCart);
+        } else {
+            res.status(404).json({ error: 'Carrito no encontrado' });
+        }
+    } catch (error) {
+        res.status(500).json({ error: 'Error al actualizar el carrito' });
+    }
+};
+
+const deleteCart = async (req, res) => {
+    try {
+        const result = await Cart.findByIdAndDelete(req.params.cid);
+        if (result) {
+            res.status(200).json({ message: 'Carrito eliminado' });
+        } else {
+            res.status(404).json({ error: 'Carrito no encontrado' });
+        }
+    } catch (error) {
+        res.status(500).json({ error: 'Error al eliminar el carrito' });
     }
 };
 
 module.exports = {
-    readCarts,
-    writeCarts
+    getCarts,
+    createCart,
+    getCartById,
+    updateCart,
+    deleteCart
 };

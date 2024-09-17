@@ -7,8 +7,8 @@ const mongoose = require('mongoose');
 const app = express();
 const PORT = 8080;
 
-
 // Conectar a MongoDB sin las opciones deprecadas
+
 mongoose.connect('mongodb://localhost:27017/nombre-de-tu-base-de-datos')
     .then(() => {
         console.log('Connected to MongoDB');
@@ -18,24 +18,24 @@ mongoose.connect('mongodb://localhost:27017/nombre-de-tu-base-de-datos')
     });
 
 
-// Importa las rutas de productos y carritos
+// Importar las rutas de productos y carritos
 const productRoutes = require('./routes/products');
 const cartRoutes = require('./routes/carts');
 
-// Importa el modelo de producto
-const Product = require('./models/Product'); // Este modelo lo tienes que crear
+// Importar el modelo de producto
+const Product = require('./models/Product');
 
-// Middleware para permitir que la app procese JSON
+// Middleware para permitir que la app procese JSON y formularios
 app.use(express.json());
-app.use(express.urlencoded({ extended: true })); // Para manejar formularios
+app.use(express.urlencoded({ extended: true }));
 
 // Configura Handlebars como motor de plantillas
 app.engine('handlebars', engine({
-    extname: '.handlebars', // Especifica la extensión de los archivos
-    defaultLayout: 'main', // Usa 'main.handlebars' como layout por defecto
+    extname: '.handlebars',
+    defaultLayout: 'main',
     runtimeOptions: {
-        allowProtoPropertiesByDefault: true, // Permite acceso a propiedades prototípicas
-        allowProtoMethodsByDefault: true,   // Permite métodos prototípicos (opcional)
+        allowProtoPropertiesByDefault: true,
+        allowProtoMethodsByDefault: true,
     }
 }));
 app.set('view engine', 'handlebars');
