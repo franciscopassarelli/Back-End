@@ -1,35 +1,52 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Real Time Products</title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/realtTimeProducts.css">
 </head>
 <body>
     <div class="container">
-        <h1>Productos en Tiempo Real</h1>
-        
-        <!-- Contenedor para los productos -->
-        <div id="products-container">
-            <h2>Lista de Productos</h2>
-            <ul id="product-list">
-                {{#each products}}
-                <li data-id="{{this.id}}">
-                    {{this.title}} - {{this.price}}
-                    <button class="delete-btn">Eliminar</button>
-                </li>
-                {{/each}}
-            </ul>
-        </div>
-        
-        <!-- Formulario para agregar productos -->
+
+        <a href="/" class="back-button">
+            &#8592; <!-- Esta es la entidad HTML para una flecha hacia la izquierda -->
+            Volver al Home
+        </a>
+        <h1>Creación de productos</h1>
+
+
+         <!-- Formulario para agregar productos -->
         <div id="form-container">
-            <h2>Agregar Producto</h2>
+            <h2>Agregar un nuevo Producto</h2>
             <form id="product-form">
                 <input type="text" id="title" placeholder="Título" required>
                 <input type="number" id="price" placeholder="Precio" required>
-                <button type="submit">Agregar Producto</button>
+                <input type="text" id="description" placeholder="Descripción" required>
+                <input type="text" id="category" placeholder="Categoría" required>
+                <button type="submit">Crear Producto</button>
             </form>
         </div>
+      <div id="products-container">
+    <h2>Lista de Productos</h2>
+    <ul id="product-list">
+        {{#each products}}
+        <li data-id="{{this.id}}">
+            <strong>Nombre:</strong>{{this.title}}<br>
+            <strong>Precios:</strong> ${{this.price}}<br>
+            <strong>Descripción:</strong> {{this.description}}<br>
+            <strong>Categoría:</strong> {{this.category}}<br>
+            <button class="delete-btn">Eliminar</button>
+        </li>
+        {{/each}}
+    </ul>
+  <a href="/productlist" class="btn">
+    Ver Productos en Tiempo Real
+</a>
+
+</div>
+        
+      
     </div>
     
     <script src="/socket.io/socket.io.js"></script>

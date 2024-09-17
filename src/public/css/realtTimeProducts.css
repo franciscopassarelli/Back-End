@@ -1,0 +1,166 @@
+/* General styles for dark mode */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+.container {
+    width: 90%;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #1e1e1e;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    position: relative; /* Added for positioning the back button */
+}
+
+h1, h2 {
+    color: #bb86fc;
+}
+
+#products-container, #form-container {
+    margin-bottom: 20px;
+    background-color: #2c2c2c;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+#form-container {
+    margin-bottom: 40px;
+}
+
+#product-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+#product-list li {
+    background-color: #333;
+    border: 1px solid #444;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    position: relative;
+    transition: background-color 0.3s;
+}
+
+#product-list li:hover {
+    background-color: #444;
+}
+
+.delete-btn {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    background-color: #cf6679;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.delete-btn:hover {
+    background-color: #b00020;
+}
+
+#form-container input {
+    margin-bottom: 10px;
+    padding: 10px;
+    width: calc(100% - 24px);
+    background-color: #333;
+    border: 1px solid #444;
+    border-radius: 5px;
+    color: #e0e0e0;
+}
+
+#form-container input::placeholder {
+    color: #888;
+}
+
+#form-container button {
+    padding: 10px 15px;
+    width: 100%;
+    border: none;
+    background-color: #03dac6;
+    color: #000;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#form-container button:hover {
+    background-color: #018786;
+}
+
+/* Responsive adjustments */
+@media (min-width: 768px) {
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #form-container {
+        width: 50%;
+        margin-bottom: 30px;
+    }
+
+    #products-container {
+        width: 80%;
+    }
+}
+
+/* Styles for the back button */
+.back-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    text-decoration: none;
+    font-size: 16px;
+    color: #03dac6; /* Color del botón de regreso */
+    background-color: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+}
+
+.back-button::before {
+    content: "←"; /* Flecha hacia la izquierda */
+    margin-right: 8px;
+}
+
+.back-button:hover {
+    color: #018786; /* Color más oscuro al hacer hover */
+}
+/* Estilos para el enlace de productos en tiempo real */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px 0;
+    font-size: 16px;
+    color: #e0e0e0;
+    background-color: #03dac6;
+    border: 1px solid #03dac6;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #018786;
+    border-color: #018786;
+    color: #e0e0e0;
+}
+
+.btn:active {
+    background-color: #004d40;
+    border-color: #004d40;
+    color: #e0e0e0;
+}

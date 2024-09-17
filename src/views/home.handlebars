@@ -1,22 +1,39 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Home</title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio - Aplicación de Productos en Tiempo Real</title>
+    <link rel="stylesheet" href="/css/home.css">
 </head>
 <body>
-    <div class="home-container">
-        <h1 class="home-header">Bienvenido a la Página de Productos</h1>
-        
-        <!-- Lista de productos -->
-        <ul class="home-product-list" id="product-list">
-            {{#each products}}
-            <li>{{this.title}} - {{this.price}}</li>
-            {{/each}}
-        </ul>
-        
-        <!-- Botón para redirigir a la página de productos en tiempo real -->
-        <a href="/realtimeproducts" class="home-btn-primary">Ver Productos en Tiempo Real</a>
-    </div>
+    <header>
+        <h1 class="home-header">Aplicación de Productos en Tiempo Real</h1>
+    </header>
+
+    <main class="home-container">
+        <section class="intro-section">
+            <h2>Bienvenido a la Aplicación</h2>
+            <p>
+                Esta aplicación está diseñada para ofrecer una experiencia de gestión de productos en tiempo real utilizando <strong>Handlebars</strong> y <strong>WebSockets</strong>. Aquí podrás:
+            </p>
+            <ul>
+                <li>Agregar nuevos productos.</li>
+                <li>Ver la lista de productos actualizada en tiempo real.</li>
+                <li>Eliminar productos de la lista.</li>
+            </ul>
+            <p>
+                Gracias a la integración de WebSockets, cualquier cambio en los productos se reflejará instantáneamente en la interfaz del usuario sin necesidad de recargar la página.
+            </p>
+        </section>
+
+        <section class="action-section">
+            <h2>Explora la Página de Productos</h2>
+            <a href="/realtimeproducts" class="home-btn-primary">
+                Ir a la creación de productos
+            </a>
+        </section>
+    </main>
+
 </body>
 </html>

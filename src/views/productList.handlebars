@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Productos</title>
+    <link rel="stylesheet" href="/css/productList.css">
+</head>
+<body>
+    <header>
+        <h1 class="header-title">Lista de Productos</h1>
+        <a href="/" class="back-button">
+            &#8592; Volver al Home
+        </a>
+    </header>
+
+    <main class="product-container">
+        <h2>Productos Disponibles</h2>
+        <ul id="product-list">
+            {{#each products}}
+            <li>
+                <strong>Nombre:</strong> {{this.title}}<br>
+                <strong>Precio:</strong> ${{this.price}}<br>
+                <strong>Descripción:</strong> {{this.description}}<br>
+                <strong>Categoría:</strong> {{this.category}}<br>
+            </li>
+            {{/each}}
+        </ul>
+    </main>
+</body>
+</html>
